@@ -4,9 +4,7 @@ import { Button } from './Button';
 
 import { Box } from './Box';
 
-import { Bookmark } from './icons/Bookmark';
-import { History } from './icons/History';
-import { Search } from './icons/Search';
+import { Bookmark, History, Search } from './icons';
 
 import theme from '../theme/theme';
 
@@ -43,13 +41,14 @@ export const MyTabBar = ({ state, descriptors, navigation }: any) => {
         };
 
         return label === 'Search' ? (
-          <Box p={15} mt={-15} bg="white" borderRadius="full">
+          <Box key={label} p={15} mt={-15} bg="white" borderRadius="full">
             <Button size={56} onPress={onPress} bg="red" borderRadius="full">
               <Search stroke="white" />
             </Button>
           </Box>
         ) : (
           <Button
+            key={label}
             flex={1}
             height={56}
             pt={6}
