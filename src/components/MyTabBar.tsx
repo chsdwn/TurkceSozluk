@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Button } from './Button';
 
 import { Box } from './Box';
 
-import { Bookmark, History, Search } from './icons';
+import { BookmarkIcon, HistoryIcon, SearchIcon } from './icons';
 
 import theme from '../theme/theme';
 
@@ -43,7 +43,7 @@ export const MyTabBar = ({ state, descriptors, navigation }: any) => {
         return label === 'Search' ? (
           <Box key={label} p={15} mt={-15} bg="white" borderRadius="full">
             <Button size={56} onPress={onPress} bg="red" borderRadius="full">
-              <Search stroke="white" />
+              <SearchIcon stroke="white" />
             </Button>
           </Box>
         ) : (
@@ -54,8 +54,12 @@ export const MyTabBar = ({ state, descriptors, navigation }: any) => {
             pt={6}
             flexDirection="column"
             onPress={onPress}>
-            {label === 'History' && <History stroke={theme.colors.gray} />}
-            {label === 'Favorite' && <Bookmark stroke={theme.colors.gray} />}
+            {label === 'History' && (
+              <HistoryIcon color={theme.colors.textLight} />
+            )}
+            {label === 'Favorite' && (
+              <BookmarkIcon color={theme.colors.textLight} />
+            )}
             <Box size={3} bg={isFocused ? 'red' : 'transparent'} mt={6} />
           </Button>
         );

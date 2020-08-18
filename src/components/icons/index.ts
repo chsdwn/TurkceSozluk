@@ -1,4 +1,5 @@
-export { Bookmark } from './Bookmark';
-export { History } from './History';
-export { Logo } from './Logo';
-export { Search } from './Search';
+export { BookmarkIcon } from './BookmarkIcon';
+export { CloseIcon } from './CloseIcon';
+export { HistoryIcon } from './HistoryIcon';
+export { LogoIcon } from './LogoIcon';
+export { SearchIcon } from './SearchIcon';

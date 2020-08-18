@@ -4,6 +4,7 @@ import {
   compose,
   flexbox,
   color,
+  position,
   size,
   space,
   layout,
@@ -11,7 +12,7 @@ import {
 } from 'styled-system';
 
 export const Button = styled(TouchableOpacity)(
-  compose(flexbox, space, color, size, layout, borderRadius),
+  compose(flexbox, space, color, position, size, layout, borderRadius),
 );
 
 Button.defaultProps = {
