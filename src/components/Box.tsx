@@ -1,16 +1,35 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View, ViewProps } from 'react-native';
 
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import {
   compose,
+  borderRadius,
   color,
   flexbox,
+  position,
   size,
   space,
-  borderRadius,
+  width,
+  BorderRadiusProps,
+  ColorProps,
+  FlexboxProps,
+  PositionProps,
+  SizeProps,
+  SpaceProps,
+  WidthProps,
 } from 'styled-system';
 
-export const Box = styled(View)(
-  compose(color, flexbox, size, space, borderRadius),
+interface IProps
+  extends ViewProps,
+    BorderRadiusProps,
+    ColorProps,
+    FlexboxProps,
+    PositionProps,
+    SizeProps,
+    SpaceProps,
+    WidthProps {}
+
+export const Box: React.FC<IProps> = styled(View)(
+  compose(borderRadius, color, flexbox, position, size, space, width),
 );

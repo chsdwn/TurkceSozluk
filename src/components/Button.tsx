@@ -1,17 +1,37 @@
-import { TouchableOpacity } from 'react-native';
-import styled from 'styled-components';
+import { TouchableOpacity, ButtonProps } from 'react-native';
+import styled from 'styled-components/native';
 import {
   compose,
-  flexbox,
+  borderRadius,
   color,
+  flexbox,
+  layout,
   position,
   size,
   space,
-  layout,
-  borderRadius,
+  BorderRadiusProps,
+  ColorProps,
+  FlexboxProps,
+  LayoutProps,
+  PositionProps,
+  SizeProps,
+  SpaceProps,
 } from 'styled-system';
 
-export const Button = styled(TouchableOpacity)(
+interface IProps
+  extends ButtonProps,
+    BorderRadiusProps,
+    ColorProps,
+    FlexboxProps,
+    LayoutProps,
+    PositionProps,
+    SizeProps,
+    SpaceProps {
+  title?: string;
+  onPress?: () => void;
+}
+
+export const Button: React.FC<IProps> = styled(TouchableOpacity)(
   compose(flexbox, space, color, position, size, layout, borderRadius),
 );
 

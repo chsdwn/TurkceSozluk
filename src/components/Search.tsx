@@ -18,18 +18,11 @@ export const Search = ({ onChangeFocus }: IProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', handleOnFocus);
-    Keyboard.addListener('keyboardDidHide', handleClearInput);
-
-    return () => {
-      Keyboard.addListener('keyboardDidShow', handleOnFocus);
-      Keyboard.addListener('keyboardDidHide', handleClearInput);
-    };
-  }, []);
+    onChangeFocus(isFocused);
+  }, [isFocused, onChangeFocus]);
 
   const handleOnFocus = () => {
     setIsFocused(true);
-    onChangeFocus(true);
   };
 
   const handleClearInput = () => {
@@ -41,7 +34,6 @@ export const Search = ({ onChangeFocus }: IProps) => {
     Keyboard.dismiss();
     handleClearInput();
     setIsFocused(false);
-    onChangeFocus(false);
   };
 
   return (

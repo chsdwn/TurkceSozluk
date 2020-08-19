@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
 import { Box } from './Box';
 
-export const BoxCenter = styled(Box)({});
+export const BoxCenter: typeof Box = styled(Box)({});
 
 BoxCenter.defaultProps = {
   flex: 1,

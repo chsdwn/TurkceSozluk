@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+
+import { Box } from '../components/Box';
+import { Text } from '../components/Text';
 
 export const DetailsScreen = () => {
   return (
-    <View>
+    <Box>
       <Text>Details</Text>
-    </View>
+    </Box>
   );
 };
-
-const styles = StyleSheet.create({});

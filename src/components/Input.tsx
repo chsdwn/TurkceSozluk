@@ -1,24 +1,61 @@
 import React from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, TextInputProps } from 'react-native';
 
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import {
-  borderRadius,
-  color,
   compose,
+  borderColor,
+  borderRadius,
+  borderWidth,
+  color,
+  height,
   shadow,
   size,
   space,
   typography,
+  BorderColorProps,
+  BorderRadiusProps,
+  BorderWidthProps,
+  ColorProps,
+  HeightProps,
+  ShadowProps,
+  SizeProps,
+  SpaceProps,
+  TypographyProps,
 } from 'styled-system';
 import theme from '../theme/theme';
 
-interface IProps {
-  placeholderTextColor?: string;
-}
+interface IProps
+  extends TextInputProps,
+    BorderColorProps,
+    BorderRadiusProps,
+    BorderWidthProps,
+    ColorProps,
+    HeightProps,
+    ShadowProps,
+    SizeProps,
+    SpaceProps,
+    TypographyProps {}
 
-export const Input = styled(TextInput).attrs(
-  ({ placeholderTextColor }: IProps) => ({
-    placeholderTextColor: theme.colors[placeholderTextColor] || '#999',
-  }),
-)(compose(borderRadius, color, shadow, size, space, typography));
+const InputBox: React.FC<IProps> = ({ placeholderTextColor, ...rest }) => (
+  <TextInput
+    placeholderTextColor={
+      placeholderTextColor ? theme.colors[placeholderTextColor] : '#999'
+    }
+    {...rest}
+  />
+);
+
+export const Input: React.FC<IProps> = styled(InputBox)(
+  compose(
+    borderColor,
+    borderRadius,
+    borderWidth,
+    color,
+    height,
+    shadow,
+    size,
+    space,
+    typography,
+  ),
+);

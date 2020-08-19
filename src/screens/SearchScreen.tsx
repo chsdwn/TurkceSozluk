@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { ImageBackground, StyleSheet, StatusBar } from 'react-native';
+import React, { useState } from 'react';
+import { ImageBackground, StatusBar } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -23,10 +23,10 @@ export const SearchScreen = ({ navigation }: any) => {
   return (
     <Box as={SafeAreaView} flex={1}>
       <StatusBar
-        backgroundColor={IS_ANDROID && '#e11e3c'}
+        backgroundColor={IS_ANDROID ? '#e11e3c' : 'transparent'}
         barStyle="light-content"
       />
-      <Box position="relative" zIndex={1} elevation={1}>
+      <Box position="relative" zIndex={1} style={{ elevation: 1 }}>
         <Box
           as={ImageBackground}
           source={require('../assets/bg.jpg')}
@@ -46,5 +46,3 @@ export const SearchScreen = ({ navigation }: any) => {
     </Box>
   );
 };
-
-const styles = StyleSheet.create({});

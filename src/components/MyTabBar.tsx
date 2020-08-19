@@ -18,7 +18,7 @@ export const MyTabBar = ({ state, descriptors, navigation }: any) => {
 
   return (
     <Box
-      pb={IS_IOS && 20}
+      pb={IS_IOS ? 20 : undefined}
       flexDirection="row"
       bg="white"
       style={{
