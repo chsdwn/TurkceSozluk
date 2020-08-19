@@ -1,12 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Button } from './Button';
 
 import { Box } from './Box';
+import { Button } from './Button';
 
 import { BookmarkIcon, HistoryIcon, SearchIcon } from './icons';
 
 import theme from '../theme/theme';
+
+import { IS_IOS } from '../constants/app';
 
 export const MyTabBar = ({ state, descriptors, navigation }: any) => {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
@@ -16,7 +17,15 @@ export const MyTabBar = ({ state, descriptors, navigation }: any) => {
   }
 
   return (
-    <View style={{ flexDirection: 'row', backgroundColor: 'white' }}>
+    <Box
+      pb={IS_IOS && 20}
+      flexDirection="row"
+      bg="white"
+      style={{
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 20,
+      }}>
       {state.routes.map((route: any, index: any) => {
         const { options } = descriptors[route.key];
         const label =
@@ -55,15 +64,24 @@ export const MyTabBar = ({ state, descriptors, navigation }: any) => {
             flexDirection="column"
             onPress={onPress}>
             {label === 'History' && (
-              <HistoryIcon color={theme.colors.textLight} />
+              <HistoryIcon
+                color={isFocused ? theme.colors.red : theme.colors.textLight}
+              />
             )}
             {label === 'Favorite' && (
-              <BookmarkIcon color={theme.colors.textLight} />
+              <BookmarkIcon
+                color={isFocused ? theme.colors.red : theme.colors.textLight}
+              />
             )}
-            <Box size={3} bg={isFocused ? 'red' : 'transparent'} mt={6} />
+            <Box
+              size={4}
+              bg={isFocused ? 'red' : 'transparent'}
+              mt={6}
+              borderRadius={2}
+            />
           </Button>
         );
       })}
-    </View>
+    </Box>
   );
 };

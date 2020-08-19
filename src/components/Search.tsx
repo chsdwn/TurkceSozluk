@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
 
 import { Box } from './Box';
@@ -9,18 +9,39 @@ import { Text } from './Text';
 import { CloseIcon, SearchIcon } from './icons';
 import theme from '../theme/theme';
 
-export const Search = () => {
+interface IProps {
+  onChangeFocus: (status: boolean) => void;
+}
+
+export const Search = ({ onChangeFocus }: IProps) => {
   const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    Keyboard.addListener('keyboardDidShow', handleOnFocus);
+    Keyboard.addListener('keyboardDidHide', handleClearInput);
+
+    return () => {
+      Keyboard.addListener('keyboardDidShow', handleOnFocus);
+      Keyboard.addListener('keyboardDidHide', handleClearInput);
+    };
+  }, []);
+
+  const handleOnFocus = () => {
+    setIsFocused(true);
+    onChangeFocus(true);
+  };
 
   const handleClearInput = () => {
     setValue('');
   };
 
   const handleClearFocus = () => {
+    console.log('handleClearFocus');
+    Keyboard.dismiss();
     handleClearInput();
     setIsFocused(false);
-    Keyboard.dismiss();
+    onChangeFocus(false);
   };
 
   return (
@@ -47,7 +68,7 @@ export const Search = () => {
           }}
           value={value}
           onChangeText={setValue}
-          onFocus={() => setIsFocused(true)}
+          onFocus={handleOnFocus}
         />
         {value.length > 0 && (
           <Button
