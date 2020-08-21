@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Animated,
-  ScrollView,
-  StatusBar,
-  Image,
-  ImageBackground,
-} from 'react-native';
+import { Animated, ScrollView, StatusBar, ImageBackground } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -17,6 +11,8 @@ import { LogoIcon } from '../components/icons';
 
 import { IS_ANDROID, SCREEN_HEIGHT } from '../constants/app';
 
+import theme from '../theme/theme';
+
 export const SearchScreen = ({ navigation }: any) => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [screenY] = useState(new Animated.Value(0));
@@ -24,14 +20,14 @@ export const SearchScreen = ({ navigation }: any) => {
   useEffect(() => {
     if (isSearchFocused) {
       Animated.timing(screenY, {
-        toValue: -285,
-        duration: 500,
+        toValue: -286,
+        duration: 200,
         useNativeDriver: true,
       }).start();
     } else {
       Animated.timing(screenY, {
         toValue: 0,
-        duration: 500,
+        duration: 200,
         useNativeDriver: true,
       }).start();
     }
@@ -39,15 +35,22 @@ export const SearchScreen = ({ navigation }: any) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBarStyle('light-content');
-      IS_ANDROID && StatusBar.setBackgroundColor('#e11e3c');
-    }, []),
+      const barStyle = isSearchFocused ? 'dark-content' : 'light-content';
+      StatusBar.setBarStyle(barStyle);
+      // IS_ANDROID && StatusBar.setBackgroundColor('transparent');
+    }, [isSearchFocused]),
   );
 
   return (
     <Box as={SafeAreaView} flex={1} bg="light">
       <StatusBar
-        backgroundColor={IS_ANDROID ? '#e11e3c' : 'transparent'}
+        backgroundColor={
+          isSearchFocused
+            ? theme.colors.light
+            : IS_ANDROID
+            ? '#e11e3c'
+            : 'transparent'
+        }
         barStyle="light-content"
       />
       <Box
@@ -75,50 +78,22 @@ export const SearchScreen = ({ navigation }: any) => {
           top={285}
           pl={16}
           pr={16}
-          pt={-16}
+          pt={isSearchFocused ? 10 : -16}
           zIndex={1}
           left={0}
           width="100%">
           <Search onChangeFocus={setIsSearchFocused} />
         </Box>
-        <Box width="100%" mt={32} mb={24} flex={1}>
-          <Box as={ScrollView} flex={1} pl={16} pr={16}>
-            <Text color="textDark">Container</Text>
-            <Text color="textDark">Container2</Text>
-            <Text color="textDark">Container3</Text>
-            <Text color="textDark">Container4</Text>
-            <Text color="textDark">Container5</Text>
-            <Text color="textDark">Container6</Text>
-            <Text color="textDark">Container7</Text>
-            <Text color="textDark">Container8</Text>
-            <Text color="textDark">-----------------</Text>
-            <Text color="textDark">Container</Text>
-            <Text color="textDark">Container2</Text>
-            <Text color="textDark">Container3</Text>
-            <Text color="textDark">Container4</Text>
-            <Text color="textDark">Container5</Text>
-            <Text color="textDark">Container6</Text>
-            <Text color="textDark">Container7</Text>
-            <Text color="textDark">Container8</Text>
-            <Text color="textDark">-----------------</Text>
-            <Text color="textDark">Container</Text>
-            <Text color="textDark">Container2</Text>
-            <Text color="textDark">Container3</Text>
-            <Text color="textDark">Container4</Text>
-            <Text color="textDark">Container5</Text>
-            <Text color="textDark">Container6</Text>
-            <Text color="textDark">Container7</Text>
-            <Text color="textDark">Container8</Text>
-            <Text color="textDark">-----------------</Text>
-            <Text color="textDark">Container</Text>
-            <Text color="textDark">Container2</Text>
-            <Text color="textDark">Container3</Text>
-            <Text color="textDark">Container4</Text>
-            <Text color="textDark">Container5</Text>
-            <Text color="textDark">Container6</Text>
-            <Text color="textDark">Container7</Text>
-            <Text color="textDark">Container8</Text>
-          </Box>
+        <Box width="100%" mt={isSearchFocused ? 42 : 32} mb={24} flex={1}>
+          {isSearchFocused ? (
+            <Box as={ScrollView} flex={1} pl={16} pr={16}>
+              <Text>Suggestion</Text>
+            </Box>
+          ) : (
+            <Box as={ScrollView} flex={1} pl={16} pr={16}>
+              <Text>History</Text>
+            </Box>
+          )}
         </Box>
       </Box>
     </Box>
