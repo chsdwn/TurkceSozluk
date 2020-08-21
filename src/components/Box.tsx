@@ -7,6 +7,8 @@ import {
   borderRadius,
   color,
   flexbox,
+  height,
+  overflow,
   position,
   size,
   space,
@@ -14,6 +16,8 @@ import {
   BorderRadiusProps,
   ColorProps,
   FlexboxProps,
+  HeightProps,
+  OverflowProps,
   PositionProps,
   SizeProps,
   SpaceProps,
@@ -25,11 +29,23 @@ interface IProps
     BorderRadiusProps,
     ColorProps,
     FlexboxProps,
+    HeightProps,
+    OverflowProps,
     PositionProps,
     SizeProps,
     SpaceProps,
     WidthProps {}
 
 export const Box: React.FC<IProps> = styled(View)(
-  compose(borderRadius, color, flexbox, position, size, space, width),
+  compose(
+    borderRadius,
+    color,
+    height,
+    overflow,
+    flexbox,
+    position,
+    size,
+    space,
+    width,
+  ),
 );

@@ -10,7 +10,7 @@ import { CloseIcon, SearchIcon } from './icons';
 import theme from '../theme/theme';
 
 interface IProps {
-  onChangeFocus: (status: boolean) => void;
+  onChangeFocus: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Search = ({ onChangeFocus }: IProps) => {
@@ -21,16 +21,11 @@ export const Search = ({ onChangeFocus }: IProps) => {
     onChangeFocus(isFocused);
   }, [isFocused, onChangeFocus]);
 
-  const handleOnFocus = () => {
-    setIsFocused(true);
-  };
-
   const handleClearInput = () => {
     setValue('');
   };
 
-  const handleClearFocus = () => {
-    console.log('handleClearFocus');
+  const handleFocusRemove = () => {
     Keyboard.dismiss();
     handleClearInput();
     setIsFocused(false);
@@ -60,7 +55,7 @@ export const Search = ({ onChangeFocus }: IProps) => {
           }}
           value={value}
           onChangeText={setValue}
-          onFocus={handleOnFocus}
+          onFocus={() => setIsFocused(true)}
         />
         {value.length > 0 && (
           <Button
@@ -76,7 +71,7 @@ export const Search = ({ onChangeFocus }: IProps) => {
         </Button>
       </Box>
       {isFocused && (
-        <Button onPress={handleClearFocus} px={14} height={52}>
+        <Button onPress={handleFocusRemove} px={14} height={52}>
           <Text>Vazgeç</Text>
         </Button>
       )}
