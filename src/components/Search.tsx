@@ -52,6 +52,7 @@ export const Search = ({ onChangeFocus }: IProps) => {
               width: 0,
               height: 4,
             },
+            elevation: 2,
           }}
           value={value}
           onChangeText={setValue}
@@ -62,11 +63,12 @@ export const Search = ({ onChangeFocus }: IProps) => {
             position="absolute"
             right={16}
             top={14}
-            onPress={handleClearInput}>
+            onPress={handleClearInput}
+            style={{ elevation: 2 }}>
             <CloseIcon color={theme.colors.textDark} />
           </Button>
         )}
-        <Button position="absolute" left={16} top={14}>
+        <Button position="absolute" left={16} top={14} style={{ elevation: 2 }}>
           <SearchIcon color={theme.colors.textMedium} />
         </Button>
       </Box>

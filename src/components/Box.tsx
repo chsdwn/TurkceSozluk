@@ -4,7 +4,10 @@ import { View, ViewProps } from 'react-native';
 import styled from 'styled-components/native';
 import {
   compose,
+  border,
+  borderColor,
   borderRadius,
+  borderWidth,
   color,
   flexbox,
   height,
@@ -13,7 +16,10 @@ import {
   size,
   space,
   width,
+  BorderProps,
+  BorderColorProps,
   BorderRadiusProps,
+  BorderWidthProps,
   ColorProps,
   FlexboxProps,
   HeightProps,
@@ -24,9 +30,12 @@ import {
   WidthProps,
 } from 'styled-system';
 
-interface IProps
+export interface BoxProps
   extends ViewProps,
+    BorderProps,
+    BorderColorProps,
     BorderRadiusProps,
+    BorderWidthProps,
     ColorProps,
     FlexboxProps,
     HeightProps,
@@ -36,9 +45,11 @@ interface IProps
     SpaceProps,
     WidthProps {}
 
-export const Box: React.FC<IProps> = styled(View)(
+export const Box: React.FC<BoxProps> = styled(View)(
   compose(
+    borderColor,
     borderRadius,
+    borderWidth,
     color,
     height,
     overflow,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { StatusBar } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import { useFocusEffect } from '@react-navigation/native';
@@ -6,18 +6,18 @@ import { useFocusEffect } from '@react-navigation/native';
 import { Box } from '../components/Box';
 import { Text } from '../components/Text';
 
-import { IS_ANDROID } from '../constants/app';
+import theme from '../theme/theme';
 
 export const HistoryScreen = () => {
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       StatusBar.setBarStyle('dark-content');
-      IS_ANDROID && StatusBar.setBackgroundColor('white');
+      StatusBar.setBackgroundColor(theme.colors.light);
     }, []),
   );
 
   return (
-    <Box as={SafeAreaView} flex={1}>
+    <Box as={SafeAreaView} flex={1} bg="light">
       <Text>History</Text>
     </Box>
   );
